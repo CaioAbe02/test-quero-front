@@ -564,6 +564,7 @@ export default {
     padding: 10px 15px;
     margin-left: 20px;
     cursor: pointer;
+    transition-duration: 0.4s;
 
     @media (max-width: 992px) {
         margin-left: 0;
@@ -575,10 +576,19 @@ export default {
     color: #007A8D;
 }
 
+.add-offers-buttons .button-cancel:hover {
+    background-color: #007A8D;
+    color: #FBFBFB;
+}
+
 .add-offers-buttons .button-add {
     border-color: #DE9E1F;
     color: #1F2D30;
     background-color: #FDCB13;
+}
+
+.add-offers-buttons .button-add:hover {
+    background-color: #DE9E1F;
 }
 
 .add-offers-buttons .button-disabled {
@@ -586,5 +596,9 @@ export default {
     background-color: rgba(1, 1, 1, 0.3);
     color: rgba(1, 1, 1, 0.5);
     border-color: rgba(1, 1, 1, 0.5);
+}
+
+.add-offers-buttons .button-disabled:hover {
+    background-color: rgba(1, 1, 1, 0.3);
 }
 </style>
