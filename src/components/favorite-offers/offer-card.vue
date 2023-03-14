@@ -68,14 +68,14 @@ export default {
     transform: translateY(-5px) scale(1.005);
 }
 
-.offer-card strong {
-    font-size: 0.9rem;
-}
-
 .offer-card-top {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.offer-card-top strong {
+    font-size: 0.9rem;
 }
 
 .offer-card-university-logo {
@@ -111,6 +111,10 @@ export default {
     border-bottom: 1px solid rgba(1, 1, 1, 0.2);
     padding: 15px 0;
     row-gap: 10px;
+}
+
+.offer-card-middle strong {
+    font-size: 0.9rem;
 }
 
 .start-date {
