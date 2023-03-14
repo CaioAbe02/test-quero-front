@@ -1,26 +1,41 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <TheHeader />
+  <NavigationBar />
+  <LinksPath />
+  <FavoriteOffers :offers="offers"/>
+  <TheFooter />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TheHeader from './components/header/the-header.vue'
+import NavigationBar from './components/nav-bar/navigation-bar.vue';
+import LinksPath from './components/links/links-path.vue'
+import FavoriteOffers from './components/favorite-offers/favorite-offers.vue';
+import TheFooter from './components/footer/the-footer.vue';
+
+import OffersData from './db/db.json'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    TheHeader,
+    NavigationBar,
+    LinksPath,
+    FavoriteOffers,
+    TheFooter,
+  },
+  data() {
+    return {
+      offers: OffersData
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+* {
+  margin: 0;
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: large;
 }
 </style>
