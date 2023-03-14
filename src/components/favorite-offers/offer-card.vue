@@ -57,9 +57,15 @@ export default {
     height: 380px;
     padding: 25px 20px;
 
+    transition: all 0.3s ease-out;
+
     @media (max-width: 992px) {
         width: auto;
     }
+}
+
+.offer-card:hover {
+    transform: translateY(-5px) scale(1.005);
 }
 
 .offer-card strong {

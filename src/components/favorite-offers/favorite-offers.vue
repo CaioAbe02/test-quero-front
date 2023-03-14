@@ -224,11 +224,17 @@ export default {
     width: 240px;
     height: 380px;
     padding: 25px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
 
     @media (max-width: 992px) {
         width: auto;
         height: 200px;
     }
+}
+
+.add-offer-card:hover {
+    transform: translateY(-5px) scale(1.005);
 }
 
 .add-icon {
