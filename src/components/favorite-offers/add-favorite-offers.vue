@@ -39,6 +39,7 @@
             </div>
             <div class="sort-container">
                 <strong>Resultado:</strong>
+                <strong class="sort">Ordenar por <strong class="sort-type">Nome da Faculdade<font-awesome icon="fa-solid fa-chevron-down" class="sort-icon"/></strong></strong>
             </div>
             <div class="offers-container">
                 <div v-for="i in commonIndexes" :key="i">
@@ -448,8 +449,25 @@ export default {
 
 .sort-container {
     grid-area: sort;
+
+    display: flex;
+    justify-content: space-between;
+
     border-bottom: 3px solid rgba(1, 1, 1, 0.1);
     padding: 40px 0 15px 0;
+}
+
+.sort {
+    text-align: end;
+}
+
+.sort-type {
+    color: #007A8D;
+    cursor: pointer;
+}
+
+.sort-icon {
+    padding-left: 10px;
 }
 
 .offers-container {
