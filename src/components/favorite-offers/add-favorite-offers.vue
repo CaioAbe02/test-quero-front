@@ -41,7 +41,12 @@
             </div>
             <div class="sort-container">
                 <strong>Resultado:</strong>
-                <strong class="sort">Ordenar por <strong class="sort-type">Nome da Faculdade<font-awesome icon="fa-solid fa-chevron-down" class="sort-icon"/></strong></strong>
+                <strong class="sort">Ordenar por
+                    <strong class="sort-type" @click="updateSort()">Nome da Faculdade
+                        <font-awesome icon="fa-solid fa-chevron-down" class="sort-icon" v-if="this.sortDescending"/>
+                        <font-awesome icon="fa-solid fa-chevron-up" class="sort-icon" v-else/>
+                    </strong>
+                </strong>
             </div>
             <div class="offers-container">
                 <div v-for="i in commonIndexes" :key="i">
@@ -103,7 +108,7 @@ export default {
             filterValue: 10000,
             offerCheck: false,
             offersSelected: [],
-            sortedOffers: this.sortOffersByUniversityName()
+            sortDescending: true
         }
     },
     computed: {
@@ -200,6 +205,13 @@ export default {
                 }
             }
             return indexes.reduce((a, b) => a.filter(c => b.includes(c)));
+        },
+        sortedOffers() {
+            if (this.sortDescending) {
+                return this.sortOffersByUniversityNameD()
+            }
+
+            return this.sortOffersByUniversityNameA()
         }
     },
     methods: {
@@ -217,10 +229,18 @@ export default {
         uncheckOffers() {
             this.offersSelected.splice(0);
         },
-        sortOffersByUniversityName() {
+        sortOffersByUniversityNameD() { // descending
             let sortedOffers = this.offers.map((x) => x); // copy prop offers
             sortedOffers = sortedOffers.sort((a, b) => (a.university.name > b.university.name) ? 1 : -1)
             return sortedOffers
+        },
+        sortOffersByUniversityNameA() { // ascending
+            let sortedOffers = this.offers.map((x) => x); // copy prop offers
+            sortedOffers = sortedOffers.sort((a, b) => (b.university.name > a.university.name) ? 1 : -1)
+            return sortedOffers
+        },
+        updateSort() {
+            this.sortDescending = !this.sortDescending
         }
     }
 }

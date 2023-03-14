@@ -8,6 +8,7 @@ import {
     faXmark,
     faStar,
     faChevronDown,
+    faChevronUp,
     faChevronLeft
 } from '@fortawesome/free-solid-svg-icons'
 
@@ -30,6 +31,7 @@ const icons = {
     faXmark,
     faStar,
     faChevronDown,
+    faChevronUp,
     faChevronLeft
 }
 
