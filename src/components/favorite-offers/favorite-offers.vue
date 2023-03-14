@@ -80,7 +80,6 @@ export default {
         showOffer(offerIndex) {
             let month = this.offers[offerIndex].start_date.slice(3, 5);
             let year = this.offers[offerIndex].start_date.slice(6, 10);
-            console.log(year);
 
             if (this.selectedFilter == 0) {
                 return true;

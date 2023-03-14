@@ -108,7 +108,9 @@ export default {
             filterValue: 10000,
             offerCheck: false,
             offersSelected: [],
-            sortDescending: true
+            sortDescending: true,
+            offersDescending: this.sortOffersByUniversityNameD(),
+            offersAscending: this.sortOffersByUniversityNameA()
         }
     },
     computed: {
@@ -208,10 +210,10 @@ export default {
         },
         sortedOffers() {
             if (this.sortDescending) {
-                return this.sortOffersByUniversityNameD()
+                return this.offersDescending
             }
 
-            return this.sortOffersByUniversityNameA()
+            return this.offersAscending
         }
     },
     methods: {
@@ -223,8 +225,20 @@ export default {
                 this.offersSelected.push(offerIndex);
             }
         },
-        sendFavoriteOffers(offers) {
-            this.$emit('getOffers', offers)
+        sendFavoriteOffers(offersSortedIndexes) {
+            let offersIndex = [];
+            let offerIndex = 0;
+
+            for (let i = 0; i < offersSortedIndexes.length; i++) {
+                offerIndex = offersSortedIndexes[i]
+                for (let j = 0; j < this.offers.length; j++) {
+                    if (this.sortedOffers[offerIndex] === this.offers[j]) {
+                        offersIndex.push(j);
+                        break;
+                    }
+                }
+            }
+            this.$emit('getOffers', offersIndex)
         },
         uncheckOffers() {
             this.offersSelected.splice(0);
