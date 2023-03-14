@@ -172,6 +172,7 @@ export default {
     border: 1px solid #007A8D;
     padding: 5px 20px;
     transition-duration: 0.4s;
+    cursor: pointer;
 }
 
 .filter-button:first-child {
