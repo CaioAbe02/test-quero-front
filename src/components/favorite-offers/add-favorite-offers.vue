@@ -10,12 +10,14 @@
             <div class="select-city-container">
                 <strong>SELECIONE SUA CIDADE</strong>
                 <select v-model="filterCity" @click="uncheckOffers">
+                    <option :key="city">Qualquer cidade</option>
                     <option v-for="city in cities" :key="city">{{ city }}</option>
                 </select>
             </div>
             <div class="select-course-container">
                 <strong>SELECIONE O CURSO DE SUA PREFERÊNCIA</strong>
                 <select v-model="filterCourse" @click="uncheckOffers">
+                    <option :key="course">Qualquer curso</option>
                     <option v-for="course in courses" :key="course">{{ course }}</option>
                 </select>
             </div>
@@ -50,16 +52,16 @@
                                 <span class="checkbox-kind"></span>
                             </label>
                         </div>
-                        <img :src=offers[i].university.logo_url alt="logo da universidade" class="univeristy-logo">
+                        <img :src=sortedOffers[i].university.logo_url alt="logo da universidade" class="univeristy-logo">
                         <div class="offer-course">
-                            <strong>{{ offers[i].course.name }}</strong>
-                            <span>{{ this.offers[i].course.level }}</span>
+                            <strong>{{ sortedOffers[i].course.name }}</strong>
+                            <span>{{ this.sortedOffers[i].course.level }}</span>
                         </div>
                         <div class="offer-value">
                             <span>Bolsa de
-                                <strong>{{ offers[i].discount_percentage }}%</strong>
+                                <strong>{{ sortedOffers[i].discount_percentage }}%</strong>
                             </span>
-                            <strong>R$ {{ offers[i].price_with_discount }}/mês</strong>
+                            <strong>R$ {{ sortedOffers[i].price_with_discount }}/mês</strong>
                         </div>
                     </div>
                 </div>
@@ -100,28 +102,34 @@ export default {
             filterKindEad: false,
             filterValue: 10000,
             offerCheck: false,
-            offersSelected: []
+            offersSelected: [],
+            sortedOffers: this.sortOffersByUniversityName()
         }
     },
     computed: {
         cities() {
             const cities = [];
             for (let i = 0; i < this.offers.length; i++) {
-                cities.push(this.offers[i].campus.city);
+                cities.push(this.sortedOffers[i].campus.city);
             }
             return [...new Set(cities)]; //remove duplicated cities
         },
         courses() {
             const courses = [];
             for (let i = 0; i < this.offers.length; i++) {
-                courses.push(this.offers[i].course.name);
+                courses.push(this.sortedOffers[i].course.name);
             }
             return [...new Set(courses)]; //remove duplicated courses
         },
         filteredFromCities() {
             const indexes = [];
+            if (this.filterCity == "Qualquer cidade") {
+                for (let i = 0; i < this.offers.length; i++) {
+                    indexes.push(i);
+                }
+            }
             for (let i = 0; i < this.offers.length; i++) {
-                if (this.offers[i].campus.city == this.filterCity) {
+                if (this.sortedOffers[i].campus.city == this.filterCity) {
                     indexes.push(i);
                 }
             }
@@ -129,8 +137,13 @@ export default {
         },
         filterdFromCourse() {
             const indexes = [];
+            if (this.filterCourse == "Qualquer curso") {
+                for (let i = 0; i < this.offers.length; i++) {
+                    indexes.push(i);
+                }
+            }
             for (let i = 0; i < this.offers.length; i++) {
-                if (this.offers[i].course.name == this.filterCourse) {
+                if (this.sortedOffers[i].course.name == this.filterCourse) {
                     indexes.push(i);
                 }
             }
@@ -140,8 +153,8 @@ export default {
             const indexes = [];
             for (let i = 0; i < this.offers.length; i++) {
                 if (this.filterKindPresencial) {
-                    if (this.offers[i]) {
-                        if (this.offers[i].course.kind == "Presencial") {
+                    if (this.sortedOffers[i]) {
+                        if (this.sortedOffers[i].course.kind == "Presencial") {
                             indexes.push(i);
                         }
                     }
@@ -153,8 +166,8 @@ export default {
             const indexes = [];
             for (let i = 0; i < this.offers.length; i++) {
                 if (this.filterKindEad) {
-                    if (this.offers[i]) {
-                        if (this.offers[i].course.kind == "EaD") {
+                    if (this.sortedOffers[i]) {
+                        if (this.sortedOffers[i].course.kind == "EaD") {
                             indexes.push(i);
                         }
                     }
@@ -168,7 +181,7 @@ export default {
         filterdFromValue() {
             const indexes = [];
             for (let i = 0; i < this.offers.length; i++) {
-                if (this.offers[i].price_with_discount <= this.filterValue) {
+                if (this.sortedOffers[i].price_with_discount <= this.filterValue) {
                     indexes.push(i);
                 }
             }
@@ -182,7 +195,7 @@ export default {
                 this.filterdFromValue
             ]
             for (let i = 0; i < indexes.length; i++) {
-                if (indexes[i].length == 0) {
+                if (indexes[i].length == 0 || (this.filterCity == "Qualquer cidade") && (this.filterCourse == "Qualquer curso")) {
                     return [];
                 }
             }
@@ -203,6 +216,11 @@ export default {
         },
         uncheckOffers() {
             this.offersSelected.splice(0);
+        },
+        sortOffersByUniversityName() {
+            let sortedOffers = this.offers.map((x) => x); // copy prop offers
+            sortedOffers = sortedOffers.sort((a, b) => (a.university.name > b.university.name) ? 1 : -1)
+            return sortedOffers
         }
     }
 }
