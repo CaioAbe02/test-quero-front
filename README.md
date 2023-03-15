@@ -1,24 +1,16 @@
-# test-quero-front
+# Descoberta Front End Test
 
-## Project setup
+> A page that allows you to add your favorites offers
+## Build setup
+
+### Install Dependencies
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Compiles and hot-reloads at localhost:8080
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Deploy
+The deploy was made on [Vercel](https://test-quero-front.vercel.app/)
