@@ -299,7 +299,7 @@ export default {
 
 .add-favorite-offers-inner {
     position: relative;
-    top: 200px;
+    top: 25%;
     z-index: 1;
     background-color: #FBFBFB;
     animation: fadeIn 0.5s;
@@ -319,7 +319,7 @@ export default {
     color: #1F2D30;
 
     @media (max-width: 992px) {
-        top: 100px;
+        top: 50%;
         width: calc(100% - 80px);
         display: grid;
         grid-template-areas:
