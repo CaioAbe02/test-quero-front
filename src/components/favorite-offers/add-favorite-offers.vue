@@ -110,7 +110,7 @@ export default {
             offersSelected: [],
             sortDescending: true,
             offersDescending: this.sortOffersByUniversityNameD(),
-            offersAscending: this.sortOffersByUniversityNameA()
+            offersAscending: this.sortOffersByUniversityNameA(),
         }
     },
     computed: {
@@ -269,7 +269,18 @@ export default {
     bottom: 0;
     background-color: rgba(31, 45, 48, 0.88);
     height: 100%;
+    animation: bgFadeIn 0.5s;
 }
+
+@keyframes bgFadeIn {
+    from {
+        background-color: rgba(31, 45, 48, 0);
+    }
+    to {
+        background-color: rgba(31, 45, 48, 0.88);
+    }
+}
+
 
 .add-favorite-offers-container {
     position: absolute;
@@ -289,9 +300,9 @@ export default {
 .add-favorite-offers-inner {
     position: relative;
     top: 200px;
-    opacity: 1;
     z-index: 1;
     background-color: #FBFBFB;
+    animation: fadeIn 0.5s;
 
     display: grid;
     grid-template-areas:
@@ -322,6 +333,14 @@ export default {
             'buttons';
             grid-template-columns: 1fr;
     }
+}
+
+@keyframes fadeIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {opacity:1 ;}
 }
 
 .icon-close {
